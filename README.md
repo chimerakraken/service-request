@@ -84,7 +84,8 @@ To ensure **ServiceStatusType** enums are handled as strings in both input and o
   {
     "buildingCode": "B123",
     "description": "Updated description",
-    "lastModifiedBy": "admin"
+    "lastModifiedBy": "admin",
+    "currentStatus": "Complete"
   }
   ```
 - **Response Codes:**
