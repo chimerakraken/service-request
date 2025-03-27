@@ -12,9 +12,6 @@ The **Service Request API** is a web service built with .NET Core and Entity Fra
 - Update service requests
 - Delete service requests
 - Uses SQLite as the database
-- Enum values are stored and returned as strings
-- Uses AutoMapper for DTO mapping
-- Returns `204 No Content` if no service requests are found
 
 ## Prerequisites
 
@@ -34,7 +31,6 @@ The **Service Request API** is a web service built with .NET Core and Entity Fra
    ```
 3. Apply migrations:
    ```sh
-   dotnet ef migrations add InitialCreate
    dotnet ef database update
    ```
 4. Run the application:
