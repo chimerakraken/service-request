@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,20 +14,28 @@ namespace service_request.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServiceRequestsController : ControllerBase
+    public class ServiceRequestController : ControllerBase
     {
         private readonly service_requestContext _context;
+        private readonly IMapper _mapper;
 
-        public ServiceRequestsController(service_requestContext context)
+
+        public ServiceRequestController(service_requestContext context, IMapper mapper)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         // GET: api/ServiceRequests
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ServiceRequest>>> GetServiceRequest()
         {
-            return await _context.ServiceRequest.ToListAsync();
+            var serviceRequests = await _context.ServiceRequest.ToListAsync();
+            if (!serviceRequests.Any())
+            {
+                return NoContent(); // 204 No Content if empty
+            }
+            return Ok(serviceRequests); // 200 OK
         }
 
         // GET: api/ServiceRequests/5
@@ -34,26 +43,26 @@ namespace service_request.Controllers
         public async Task<ActionResult<ServiceRequest>> GetServiceRequest(int id)
         {
             var serviceRequest = await _context.ServiceRequest.FindAsync(id);
-
             if (serviceRequest == null)
             {
-                return NotFound();
+                return NotFound(); // 404 Not Found
             }
-
-            return serviceRequest;
+            return Ok(serviceRequest); // 200 OK
         }
 
         // PUT: api/ServiceRequests/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutServiceRequest(int id, ServiceRequest serviceRequest)
+        public async Task<IActionResult> PutServiceRequest(int id, [FromBody] UpdateServiceRequestDto updateServiceRequestDto)
         {
-            if (id != serviceRequest.Id)
+            var serviceRequest = await _context.ServiceRequest.FindAsync(id);
+            if (serviceRequest == null)
             {
-                return BadRequest();
+                return NotFound(); // 404 Not Found
             }
 
-            _context.Entry(serviceRequest).State = EntityState.Modified;
+            // Map only allowed properties (excluding Id)
+            _mapper.Map(updateServiceRequestDto, serviceRequest);
 
             try
             {
@@ -63,7 +72,7 @@ namespace service_request.Controllers
             {
                 if (!ServiceRequestExists(id))
                 {
-                    return NotFound();
+                    return NotFound();  // 404 Not Found
                 }
                 else
                 {
@@ -71,14 +80,20 @@ namespace service_request.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(serviceRequest); // Return updated entity
         }
 
         // POST: api/ServiceRequests
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ServiceRequest>> PostServiceRequest(CreateServiceRequestDto serviceRequestDto)
+        public async Task<ActionResult<ServiceRequest>> PostServiceRequest([FromBody] CreateServiceRequestDto serviceRequestDto)
         {
+
+            if (serviceRequestDto == null)
+            {
+                return BadRequest("Invalid request data."); // 400 Bad Request
+            }
+
             _context.ServiceRequest.Add(serviceRequestDto);
             await _context.SaveChangesAsync();
 
@@ -98,7 +113,7 @@ namespace service_request.Controllers
             _context.ServiceRequest.Remove(serviceRequest);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Service request deleted successfully.");
         }
 
         private bool ServiceRequestExists(int id)

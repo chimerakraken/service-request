@@ -17,7 +17,7 @@ namespace service_request.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    BuildingCode = table.Column<string>(type: "TEXT", nullable: true),
+                    BuildingCode = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     CurrentStatus = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedBy = table.Column<string>(type: "TEXT", nullable: true),

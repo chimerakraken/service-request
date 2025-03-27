@@ -24,6 +24,7 @@ namespace service_request.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("BuildingCode")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedBy")

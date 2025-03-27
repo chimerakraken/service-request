@@ -11,7 +11,7 @@ using service_request.Data;
 namespace service_request.Migrations
 {
     [DbContext(typeof(service_requestContext))]
-    [Migration("20250327072052_InitialCreate")]
+    [Migration("20250327075012_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,6 +27,7 @@ namespace service_request.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("BuildingCode")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedBy")
