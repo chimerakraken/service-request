@@ -67,6 +67,7 @@ To ensure **ServiceStatusType** enums are handled as strings in both input and o
   {
     "description": "Sample request",
     "currentStatus": "Open"
+    "lastModifiedBy": "Me"
   }
   ```
 - **Response Codes:**
