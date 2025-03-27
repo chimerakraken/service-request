@@ -101,3 +101,4 @@ To ensure **ServiceStatusType** enums are handled as strings in both input and o
 ## Notes
 
 - Ensure migrations are applied before running the API.
+- Ensure connection string points to local sqlite.
