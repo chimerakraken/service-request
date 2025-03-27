@@ -105,6 +105,3 @@ To ensure **ServiceStatusType** enums are handled as strings in both input and o
 ## Notes
 
 - Ensure migrations are applied before running the API.
-- Uses **AutoMapper** for mapping DTOs to entities.
-- Returns `204 No Content` for empty lists instead of `200 OK` with an empty array.
-- **CreatedDate** is set when a new request is created, while **LastModifiedBy** and **LastModifiedDate** are updated when a request is modified.
