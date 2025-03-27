@@ -5,15 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace service_request.Models
 {
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum ServiceStatusType
-    {
-        NotApplicable,
-        Created,
-        InProgress,
-        Complete,
-        Canceled
-    }
 
     public class ServiceRequest
     {
