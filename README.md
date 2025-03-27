@@ -73,7 +73,7 @@ To ensure **ServiceStatusType** enums are handled as strings in both input and o
   {
     "buildingCode": "B123",
     "description": "Aircon maintenance required",
-    "currentStatus": "Open",
+    "currentStatus": "Created",
     "createdBy": "admin",
     "createdDate": "2025-03-27T10:00:00Z",
     "lastModifiedBy": null,

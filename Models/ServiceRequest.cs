@@ -8,9 +8,10 @@ namespace service_request.Models
     [JsonConverter(typeof(StringEnumConverter))]
     public enum ServiceStatusType
     {
-        Open,
+        NotApplicable,
+        Created,
         InProgress,
-        Completed,
+        Complete,
         Canceled
     }
 
