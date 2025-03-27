@@ -1,6 +1,3 @@
-﻿I'll update your README to reflect the correct request models for POST and PUT. Here's the updated version:  
-
----
 
 # Service Request API
 
@@ -15,9 +12,6 @@ The **Service Request API** is a web service built with .NET Core and Entity Fra
 - Update service requests
 - Delete service requests
 - Uses SQLite as the database
-- Enum values are stored and returned as strings
-- Uses AutoMapper for DTO mapping
-- Returns `204 No Content` if no service requests are found
 
 ## Prerequisites
 
@@ -37,7 +31,6 @@ The **Service Request API** is a web service built with .NET Core and Entity Fra
    ```
 3. Apply migrations:
    ```sh
-   dotnet ef migrations add InitialCreate
    dotnet ef database update
    ```
 4. Run the application:
@@ -108,6 +101,3 @@ To ensure **ServiceStatusType** enums are handled as strings in both input and o
 ## Notes
 
 - Ensure migrations are applied before running the API.
-- Uses **AutoMapper** for mapping DTOs to entities.
-- Returns `204 No Content` for empty lists instead of `200 OK` with an empty array.
-- **CreatedDate** is set when a new request is created, while **LastModifiedBy** and **LastModifiedDate** are updated when a request is modified.
