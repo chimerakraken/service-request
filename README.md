@@ -1,6 +1,3 @@
-﻿I'll update your README to reflect the correct request models for POST and PUT. Here's the updated version:  
-
----
 
 # Service Request API
 
